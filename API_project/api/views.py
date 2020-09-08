@@ -11,7 +11,7 @@ def user_all(request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data["id"])
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
@@ -19,7 +19,7 @@ def user_all(request):
         for user in users:
             user.is_deleted = True
             user.save()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response('{}')
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -39,13 +39,13 @@ def user_id(request, pk):
         serializer = UserSerializer(user, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response('{}')
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         user.is_deleted = True
         user.save()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response('{}')
 
 
 @api_view(['GET', 'POST', 'DELETE'])
@@ -60,7 +60,7 @@ def task_all(request):
         serializer = TaskSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data["id"])
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
@@ -68,7 +68,7 @@ def task_all(request):
         for task in tasks:
             task.is_deleted = True
             task.save()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response('{}')
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -88,13 +88,13 @@ def task_id(request, pk):
         serializer = TaskSerializer(task, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response('{}')
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         task.is_deleted = True
         task.save()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response('{}')
 
 
 
